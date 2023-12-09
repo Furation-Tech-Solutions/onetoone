@@ -42,10 +42,9 @@ jobs:
       - name: Copy files over at server
         run: scp -r  -i "~/.ssh/waterfall-dev.pem" config/ models/ index.js package.json package-lock.json ubuntu@${{vars.HOST}}:~/onetoone/
       - name: export pm2 and restart pm2 with updated code
-        run: ssh -i "~/.ssh/waterfall-dev.pem" ubuntu@${{vars.HOST}} '. /etc/profile; export PATH=$PATH:$HOME/.nvm/versions/node/v18.18.0/bin; cd $HOME/onetoone/ && npm install --production &&  pm2 restart 0'
+        run: ssh -i "~/.ssh/waterfall-dev.pem" ubuntu@${{vars.HOST}} '. /etc/profile; export PATH=$PATH:$HOME/.nvm/versions/node/v18.18.0/bin; cd $HOME/onetoone/ && npm install --omit dev &&  pm2 restart 0'
       - name: clean up
         run: |
-          rm distOut.zip && \
           rm ~/.ssh/waterfall-dev.pem
       - name: Completion
         run: echo "Completed"
