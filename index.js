@@ -3,7 +3,6 @@ const {
     Message,
     Realtors
 } = require("./models/index");
-require('dotenv').config()
 let {
     PORT
 } = process.env;
